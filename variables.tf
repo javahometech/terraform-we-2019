@@ -3,6 +3,26 @@ variable "vpc_cidr" {
   type        = "string"
   default     = "10.0.0.0/16"
 }
+
+variable "region" {
+  description = "Choose region for your stack"
+  type        = "string"
+  default     = "ap-south-1"
+}
+variable "web_instance_count" {
+  description = "Choose instance count"
+  type        = "string"
+  default     = "2"
+}
+
+variable "web_amis" {
+  type = "map"
+  default = {
+    ap-south-1     = "ami-0d2692b6acea72ee6"
+    ap-southeast-1 = "ami-01f7527546b557442"
+  }
+}
+
 variable "vpc_tenancy" {
   description = "Choose tenancy for VPC"
   type        = "string"
@@ -17,10 +37,4 @@ variable "vpc_tags" {
     Batch = "Weekends"
     Year  = "2019"
   }
-}
-
-variable "subnet_cidrs" {
-  description = "Choose CIDR for subnet"
-  type        = "list"
-  default     = ["10.20.1.0/24", "10.20.2.0/24"]
 }

@@ -23,6 +23,7 @@ resource "aws_subnet" "public" {
   vpc_id                  = "${aws_vpc.my_vpc.id}"
   cidr_block              = "${cidrsubnet(var.vpc_cidr, 8, count.index)}"
   map_public_ip_on_launch = true
+  availability_zone       = "${local.az_names[count.index]}"
   tags = {
     Name = "Subnet-${count.index + 1}-${terraform.workspace}"
   }
@@ -61,4 +62,7 @@ resource "aws_route_table_association" "pub_rt_association" {
   count          = "${length(local.az_names)}"
   subnet_id      = "${local.pub_sub_ids[count.index]}"
   route_table_id = "${aws_route_table.pub_rt.id}"
+}
+output "az_names" {
+  value = "${local.az_names}"
 }

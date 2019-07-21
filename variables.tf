@@ -38,3 +38,11 @@ variable "vpc_tags" {
     Year  = "2019"
   }
 }
+
+variable "rds_pwd" {
+  description = "Choose RDS password"
+}
+
+variable "elb_al_s3" {
+  default = "javahome-we-accesslogs"
+}
